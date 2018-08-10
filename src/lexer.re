@@ -81,10 +81,11 @@ int scan_csv(Scanner * s, const char * stop) {
 
 		NL								= "\r\n" | '\n' | '\r';
 		EOF								= '\x00';
-
+		BOOL							= "true" | "false";
 
 		// Settings for CSV
 		[0-9\.]+						{ return TEXT_NUMERIC; }
+		BOOL							{ return TEXT_NUMERIC; }
 		EOF								{ return TDP_EOF; }
 		NL								{ return RECORD_DELIMITER; }
 		','								{ return FIELD_DELIMITER; }
@@ -118,6 +119,7 @@ int scan_tsv(Scanner * s, const char * stop) {
 
 		// Settings for TSV
 		[0-9\.]+						{ return TEXT_NUMERIC; }
+		BOOL							{ return TEXT_NUMERIC; }
 		EOF								{ return TDP_EOF; }
 		NL								{ return RECORD_DELIMITER; }
 		'\t'							{ return FIELD_DELIMITER; }

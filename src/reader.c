@@ -102,13 +102,15 @@ simple_token * tokenize_text(const char * source, size_t start, size_t len, int 
 
 
 	do {
-		switch(format) {
+		switch (format) {
 			case FORMAT_CSV:
 				type = scan_csv(&s, stop);
 				break;
+
 			case FORMAT_TSV:
 				type = scan_tsv(&s, stop);
 				break;
+
 			default:
 				// Error
 				fprintf(stderr, "ERROR.  %d is not a valid parsing format.\n", format);
@@ -496,6 +498,16 @@ void Test_export_to_json(CuTest* tc) {
 	out = export_to_json(test->str, t);
 	simple_token_tree_free(t);
 	CuAssertStrEquals(tc, "[\n\t{\n\t\t\"a\": 1\n\t}\n]\n", out->str);
+	d_string_free(out, true);
+
+	// Boolean
+	d_string_erase(test, 0, -1);
+	d_string_append(test, "one,two\ntrue,false");
+	t = tokenize_text(test->str, 0, test->currentStringLength, FORMAT_CSV);
+	result = parse_tdp_token_chain(t);
+	out = export_to_json(test->str, t);
+	simple_token_tree_free(t);
+	CuAssertStrEquals(tc, "[\n\t{\n\t\t\"one\": true,\n\t\t\"two\": false\n\t}\n]\n", out->str);
 	d_string_free(out, true);
 
 	// Tests from https://github.com/maxogden/csv-spectrum
