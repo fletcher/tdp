@@ -1,0 +1,5 @@
+#!/bin/sh
+
+re2c -i -8 lexer.re > lexer.c
+
+../../mmd6-public/lemon/build/lemon -l parser.y
