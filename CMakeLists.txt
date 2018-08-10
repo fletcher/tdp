@@ -5,17 +5,17 @@ cmake_minimum_required (VERSION 2.6)
 # Define Our Project
 # ==================
 
-set (My_Project_Title "C-Template")
-set (My_Project_Description "Boilerplate c project with cmake support, CuTest unit testing, and more.")
+set (My_Project_Title "TDP-Parser")
+set (My_Project_Description "Parse CSV (and other tabular data) and export to JSON")
 set (My_Project_Author "Fletcher T. Penney")
-set (My_Project_Revised_Date "2017-01-16")
+set (My_Project_Revised_Date "2018-08-10")
 set (My_Project_Version_Major 1)
 set (My_Project_Version_Minor 0)
-set (My_Project_Version_Patch 5)
+set (My_Project_Version_Patch 0)
 
 set (My_Project_Version "${My_Project_Version_Major}.${My_Project_Version_Minor}.${My_Project_Version_Patch}")
 
-set (My_Project_Copyright_Date "2015-2017")
+set (My_Project_Copyright_Date "2018")
 set (My_Project_Copyright "Copyright © ${My_Project_Copyright_Date} ${My_Project_Author}.")
 
 string(TOUPPER ${My_Project_Title} My_Project_Title_Caps  )
@@ -165,6 +165,7 @@ set(src_files
 
 # Primary header files, also for doxygen documentation
 set(header_files
+	src/libTDP.h
 )
 
 # Public headers, will be installed in 'include'
@@ -174,11 +175,23 @@ set(public_header_files
 
 # Utility source files will not be included in doxygen
 set(src_utility_files
-#	src/d_string.c
+	src/d_string.c
+	src/file.c
+	src/lexer.c
+	src/parser.c
+	src/reader.c
+	src/simple_token.c
+	src/stack.c
 )
 
 set(header_utility_files
-#	src/d_string.h
+	src/d_string.h
+	src/file.h
+	src/lexer.h
+	src/parser.h
+	src/reader.h
+	src/simple_token.h
+	src/stack.h
 	${PROJECT_BINARY_DIR}/version.h
 )
 
@@ -303,7 +316,7 @@ endif (WIN32)
 # ==============
 
 # Create a library?
-add_library(libFOO STATIC
+add_library(libTDP STATIC
 	${src_files}
 	${src_utility_files}
 	${header_files}
@@ -311,25 +324,25 @@ add_library(libFOO STATIC
 )
 
 # remove the extra "lib" from "liblibFOO"
-SET_TARGET_PROPERTIES(libFOO PROPERTIES
+SET_TARGET_PROPERTIES(libTDP PROPERTIES
 	PREFIX ""
 	FRAMEWORK TRUE
 	FRAMEWORK_VERSION A
-	MACOSX_FRAMEWORK_IDENTIFIER net.fletcherpenney.c-template
+	MACOSX_FRAMEWORK_IDENTIFIER net.fletcherpenney.csvparser
 )
 
 # Create a command-line app?
-# if (NOT DEFINED TEST)
-# 	add_executable(main
-# 		src/main.c
-# 		src/d_string.c
-# 		src/d_string.h
-# 		${header_files}
-# 	)
-# 
-#	Link the library to the app?
-#	target_link_libraries(main libFOO)
-# endif()
+if (NOT DEFINED TEST)
+	add_executable(tdp
+		src/main.c
+		src/d_string.c
+		src/argtable3.c
+		${header_files}
+	)
+
+	# Link the library to the app?
+	target_link_libraries(tdp libTDP)
+endif()
 
 # Xcode settings for fat binaries
 # set_target_properties(libFOO PROPERTIES XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH "NO")
