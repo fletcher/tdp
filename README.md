@@ -44,7 +44,7 @@ Convert CSV into JSON:
 
 Convert TSV:
 
-	tdp -f tdp > data.json
+	tdp -f tsv > data.json
 
 
 ## Why? ##
