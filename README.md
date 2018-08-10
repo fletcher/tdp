@@ -102,6 +102,8 @@ I've tried to ensure an accurate parser for the CSV and TSV formats, and there
 are included unit tests for accuracy.  There are currently more rigorous tests
 for the CSV format, which has more edge cases than TSV.
 
+Some of the CSV unit tests come from [csv-spectrum].
+
 If you find examples that are improperly parsed, then feel free to let me
 know.  Do keep in mind that the parser is designed to be compliant with the
 CSV and TSV "specs" (with the understanding that they lack true formal
@@ -113,3 +115,4 @@ by some programs.
 
 
 [Mustache]:	https://mustache.github.io/
+[csv-spectrum]:	https://github.com/maxogden/csv-spectrum
