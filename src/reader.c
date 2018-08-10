@@ -573,6 +573,16 @@ void Test_export_to_json(CuTest* tc) {
 	d_string_free(out, true);
 
 
+	// TSV
+	d_string_erase(test, 0, -1);
+	d_string_append(test, "a\tb\n\"foo\" \"bar\"\t\"foo\nbar\"\tbat");
+	t = tokenize_text(test->str, 0, test->currentStringLength, FORMAT_TSV);
+	result = parse_tdp_token_chain(t);
+	out = export_to_json(test->str, t);
+	CuAssertStrEquals(tc, "[\n\t{\n\t\t\"a\": \"\\\"foo\\\" \\\"bar\\\"\",\n\t\t\"b\": \"\\\"foo\"\n\t},\n\t{\n\t\t\"a\": \"bar\\\"\",\n\t\t\"b\": \"bat\"\n\t}\n]\n", out->str);
+	simple_token_tree_free(t);
+	d_string_free(out, true);
+
 	d_string_free(test, true);
 }
 #endif
