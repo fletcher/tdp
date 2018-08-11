@@ -364,6 +364,14 @@ endif()
 
 # install (FILES ${public_header_files} DESTINATION local/include/libFoo) 
 
+install (TARGETS tdp
+	DESTINATION bin
+	COMPONENT application
+)
+
+set (CPACK_COMPONENT_APPLICATION_DISPLAY_NAME "TDP")
+set (CPACK_COMPONENT_APPLICATION_DESCRIPTION "Install the tdp program.")
+
 set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "${My_Project_Description}")
 set (CPACK_PACKAGE_VENDOR "${My_Project_Author}")
 set (CPACK_PACKAGE_VERSION "${My_Project_Version_Major}.${My_Project_Version_Minor}.${My_Project_Version_Patch}")
