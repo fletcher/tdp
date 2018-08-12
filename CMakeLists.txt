@@ -364,10 +364,12 @@ endif()
 
 # install (FILES ${public_header_files} DESTINATION local/include/libFoo) 
 
-install (TARGETS tdp
-	DESTINATION bin
-	COMPONENT application
-)
+if (NOT DEFINED TEST)
+	install (TARGETS tdp
+		DESTINATION bin
+		COMPONENT application
+	)
+endif()
 
 set (CPACK_COMPONENT_APPLICATION_DISPLAY_NAME "TDP")
 set (CPACK_COMPONENT_APPLICATION_DESCRIPTION "Install the tdp program.")

@@ -31,22 +31,22 @@
 #include "libTDP.h"
 
 // argtable structs
-struct arg_lit *a_help;
+struct arg_lit *a_help, *a_array;
 struct arg_str *a_format;
 struct arg_end *a_end;
 struct arg_file *a_file;
 
-void convert_buffer(DString * buffer, short format) {
+void convert_buffer(DString * buffer, short format, bool array_out) {
 	if (buffer) {
 		DString * out = d_string_new("");
 
 		switch (format) {
 			case FORMAT_CSV:
-				out = csv_to_json(buffer);
+				out = csv_to_json(buffer, array_out);
 				break;
 
 			case FORMAT_TSV:
-				out = tsv_to_json(buffer);
+				out = tsv_to_json(buffer, array_out);
 				break;
 		}
 
@@ -63,9 +63,12 @@ int main( int argc, char** argv ) {
 	char * binname = "tdp";
 	short format = FORMAT_CSV;
 	int exitcode = EXIT_SUCCESS;
+	bool array_out = false;
 
 	void *argtable[] = {
 		a_help			= arg_lit0(NULL, "help", "display this help and exit"),
+
+		a_array			= arg_lit0("a", "array", "output as array of arrays"),
 
 		a_format		= arg_str0("f", "from", "FORMAT", "convert from tabular data format (default CSV), FORMAT = csv|tsv"),
 
@@ -92,6 +95,10 @@ int main( int argc, char** argv ) {
 		goto exit;
 	}
 
+	if (a_array->count > 0) {
+		array_out = true;
+	}
+
 	if (a_format->count > 0) {
 		if (strcmp(a_format->sval[0], "csv") == 0) {
 			format = FORMAT_CSV;
@@ -109,7 +116,7 @@ int main( int argc, char** argv ) {
 	if (a_file->count == 0) {
 		// Read from stdin
 		buffer = stdin_buffer();
-		convert_buffer(buffer, format);
+		convert_buffer(buffer, format, array_out);
 		d_string_free(buffer, true);
 	} else {
 		// Read from files
@@ -122,7 +129,7 @@ int main( int argc, char** argv ) {
 				goto exit;
 			}
 
-			convert_buffer(buffer, format);
+			convert_buffer(buffer, format, array_out);
 			d_string_free(buffer, true);
 		}
 	}

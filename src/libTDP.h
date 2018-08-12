@@ -56,6 +56,8 @@
 #ifndef LIBTDP_PARSER_H
 #define LIBTDP_PARSER_H
 
+#include <stdbool.h>
+
 
 /// typedefs for internal data structures.  If you intend to work with these structures
 /// in your own code, you may need to import additional header files.
@@ -72,11 +74,11 @@ enum parser_formats {
 
 
 /// Convert CSV to JSON
-DString * csv_to_json(DString * source);
+DString * csv_to_json(DString * source, bool array_out);
 
 
 /// Convert TSV text to JSON
-DString * tsv_to_json(DString * source);
+DString * tsv_to_json(DString * source, bool array_out);
 
 
 #endif
