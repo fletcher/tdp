@@ -176,7 +176,7 @@ int parse_tdp_token_chain(simple_token * chain) {
 
 	#ifndef NDEBUG
 	fprintf(stderr, "\n");
-	TDPTrace(stderr, "parser >>");
+	TDPParseTrace(stderr, "parser >>");
 	#endif
 
 	while (walker != NULL) {
