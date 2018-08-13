@@ -155,11 +155,11 @@ simple_token * simple_token_new_parent(simple_token * child, unsigned short type
 
 
 /// Forward declaration
-void print_token_tree(simple_token * t, unsigned short depth, const char * string);
+void simple_print_token_tree(simple_token * t, unsigned short depth, const char * string);
 
 
 /// Print contents of the token based on specified string
-void print_token(simple_token * t, unsigned short depth, const char * string) {
+void simple_print_token(simple_token * t, unsigned short depth, const char * string) {
 	if (t != NULL) {
 		for (int i = 0; i < depth; ++i) {
 			fprintf(stderr, "\t");
@@ -172,16 +172,16 @@ void print_token(simple_token * t, unsigned short depth, const char * string) {
 		}
 
 		if (t->child != NULL) {
-			print_token_tree(t->child, depth + 1, string);
+			simple_print_token_tree(t->child, depth + 1, string);
 		}
 	}
 }
 
 
 /// Print contents of the token tree based on specified string
-void print_token_tree(simple_token * t, unsigned short depth, const char * string) {
+void simple_print_token_tree(simple_token * t, unsigned short depth, const char * string) {
 	while (t != NULL) {
-		print_token(t, depth, string);
+		simple_print_token(t, depth, string);
 
 		t = t->next;
 	}
@@ -190,7 +190,7 @@ void print_token_tree(simple_token * t, unsigned short depth, const char * strin
 
 /// Print a description of the token based on specified string
 void simple_token_describe(simple_token * t, const char * string) {
-	print_token(t, 0, string);
+	simple_print_token(t, 0, string);
 }
 
 
@@ -199,7 +199,7 @@ void simple_token_tree_describe(simple_token * t, const char * string) {
 	fprintf(stderr, "=====>\n");
 
 	while (t != NULL) {
-		print_token(t, 0, string);
+		simple_print_token(t, 0, string);
 
 		t = t->next;
 	}

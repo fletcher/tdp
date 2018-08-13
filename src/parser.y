@@ -62,6 +62,8 @@
 
 %extra_argument { simple_token ** result }
 
+%name TDPParse
+
 %fallback TEXT_PLAIN NEEDS_ESCAPE.
 
 doc					::= header(B) records(C).							{ *result = B; simple_token_chain_append(B,C); }		// Successful parse with header

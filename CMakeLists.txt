@@ -8,10 +8,10 @@ cmake_minimum_required (VERSION 2.6)
 set (My_Project_Title "TDP-Parser")
 set (My_Project_Description "Parse CSV (and other tabular data) and export to JSON")
 set (My_Project_Author "Fletcher T. Penney")
-set (My_Project_Revised_Date "2018-08-10")
+set (My_Project_Revised_Date "2018-08-13")
 set (My_Project_Version_Major 1)
-set (My_Project_Version_Minor 0)
-set (My_Project_Version_Patch 1)
+set (My_Project_Version_Minor 1)
+set (My_Project_Version_Patch 0)
 
 set (My_Project_Version "${My_Project_Version_Major}.${My_Project_Version_Minor}.${My_Project_Version_Patch}")
 
@@ -363,6 +363,16 @@ endif()
 # with the ADD_PUBLIC_HEADER() macro)
 
 # install (FILES ${public_header_files} DESTINATION local/include/libFoo) 
+
+if (NOT DEFINED TEST)
+	install (TARGETS tdp
+		DESTINATION bin
+		COMPONENT application
+	)
+endif()
+
+set (CPACK_COMPONENT_APPLICATION_DISPLAY_NAME "TDP")
+set (CPACK_COMPONENT_APPLICATION_DESCRIPTION "Install the tdp program.")
 
 set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "${My_Project_Description}")
 set (CPACK_PACKAGE_VENDOR "${My_Project_Author}")
