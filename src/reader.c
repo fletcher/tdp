@@ -92,7 +92,7 @@ simple_token * tokenize_text(const char * source, size_t start, size_t len, int 
 	s.cur = s.start;
 
 	int type;						// TOKEN type
-	simple_token * t;				// Create token chain
+	simple_token * t = NULL;		// Create token chain
 	simple_token * root = simple_token_new(0, start, len);
 
 	// Where do we stop parsing?
@@ -144,7 +144,7 @@ simple_token * tokenize_text(const char * source, size_t start, size_t len, int 
 			case 0:
 
 				// Source finished
-				if (t->tail && t->tail->type != TDP_EOF) {
+				if (t && t->tail && (t->tail->type != TDP_EOF)) {
 					t = simple_token_new(TDP_EOF, (size_t)(s.start - source), (size_t)(s.cur - s.start));
 					simple_token_chain_append(root, t);
 				}
