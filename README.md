@@ -4,9 +4,9 @@
 | ---------- | ------------------------- |  
 | Title:     | TDP-Parser        |  
 | Author:    | Fletcher T. Penney       |  
-| Date:      | 2018-08-10 |  
+| Date:      | 2018-08-13 |  
 | Copyright: | Copyright © 2018 Fletcher T. Penney.    |  
-| Version:   | 1.0.1      |  
+| Version:   | 1.1.0      |  
 
 
 ## Introduction ##
