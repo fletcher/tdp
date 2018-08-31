@@ -55,7 +55,7 @@
 **    YYACTIONTYPE       is the data type used for "action codes" - numbers
 **                       that indicate what to do in response to the next
 **                       token.
-**    ParseTOKENTYPE     is the data type used for minor type for terminal
+**    TDPParseTOKENTYPE     is the data type used for minor type for terminal
 **                       symbols.  Background: A "minor type" is a semantic
 **                       value associated with a terminal or non-terminal
 **                       symbols.  For example, for an "ID" terminal symbol,
@@ -66,14 +66,14 @@
 **                       symbols.
 **    YYMINORTYPE        is the data type used for all minor types.
 **                       This is typically a union of many types, one of
-**                       which is ParseTOKENTYPE.  The entry in the union
+**                       which is TDPParseTOKENTYPE.  The entry in the union
 **                       for terminal symbols is called "yy0".
 **    YYSTACKDEPTH       is the maximum depth of the parser's stack.  If
 **                       zero the stack is dynamically sized using realloc()
-**    ParseARG_SDECL     A static variable declaration for the %extra_argument
-**    ParseARG_PDECL     A parameter declaration for the %extra_argument
-**    ParseARG_STORE     Code to store %extra_argument into yypParser
-**    ParseARG_FETCH     Code to extract %extra_argument from yypParser
+**    TDPParseARG_SDECL     A static variable declaration for the %extra_argument
+**    TDPParseARG_PDECL     A parameter declaration for the %extra_argument
+**    TDPParseARG_STORE     Code to store %extra_argument into yypParser
+**    TDPParseARG_FETCH     Code to extract %extra_argument from yypParser
 **    YYERRORSYMBOL      is the code number of the error symbol.  If not
 **                       defined, then do no error processing.
 **    YYNSTATE           the combined number of states.
@@ -93,18 +93,18 @@
 #define YYCODETYPE unsigned char
 #define YYNOCODE 22
 #define YYACTIONTYPE unsigned char
-#define ParseTOKENTYPE  simple_token *
+#define TDPParseTOKENTYPE  simple_token *
 typedef union {
 	int yyinit;
-	ParseTOKENTYPE yy0;
+	TDPParseTOKENTYPE yy0;
 } YYMINORTYPE;
 #ifndef YYSTACKDEPTH
 	#define YYSTACKDEPTH 100
 #endif
-#define ParseARG_SDECL  simple_token ** result ;
-#define ParseARG_PDECL , simple_token ** result
-#define ParseARG_FETCH  simple_token ** result  = yypParser->result
-#define ParseARG_STORE yypParser->result  = result
+#define TDPParseARG_SDECL  simple_token ** result ;
+#define TDPParseARG_PDECL , simple_token ** result
+#define TDPParseARG_FETCH  simple_token ** result  = yypParser->result
+#define TDPParseARG_STORE yypParser->result  = result
 #define YYFALLBACK 1
 #define YYNSTATE             9
 #define YYNRULE              25
@@ -286,7 +286,7 @@ struct yyParser {
 	#ifndef YYNOERRORRECOVERY
 	int yyerrcnt;                 /* Shifts left before out of the error */
 	#endif
-	ParseARG_SDECL                /* A place to hold %extra_argument */
+	TDPParseARG_SDECL                /* A place to hold %extra_argument */
 	#if YYSTACKDEPTH<=0
 	int yystksz;                  /* Current side of the stack */
 	yyStackEntry *yystack;        /* The parser's stack */
@@ -321,7 +321,7 @@ typedef struct yyParser yyParser;
 ** Outputs:
 ** None.
 */
-void ParseTrace(FILE *TraceFILE, char *zTracePrompt) {
+void TDPParseTrace(FILE *TraceFILE, char *zTracePrompt) {
 	yyTraceFILE = TraceFILE;
 	yyTracePrompt = zTracePrompt;
 
@@ -421,7 +421,7 @@ static int yyGrowStack(yyParser *p) {
 #endif
 
 /* Datatype of the argument to the memory allocated passed as the
-** second argument to ParseAlloc() below.  This can be changed by
+** second argument to TDPParseAlloc() below.  This can be changed by
 ** putting an appropriate #define in the %include section of the input
 ** grammar.
 */
@@ -439,9 +439,9 @@ static int yyGrowStack(yyParser *p) {
 **
 ** Outputs:
 ** A pointer to a parser.  This pointer is used in subsequent calls
-** to Parse and ParseFree.
+** to TDPParse and TDPParseFree.
 */
-void *ParseAlloc(void *(*mallocProc)(YYMALLOCARGTYPE)) {
+void *TDPParseAlloc(void *(*mallocProc)(YYMALLOCARGTYPE)) {
 	yyParser *pParser;
 	pParser = (yyParser*)(*mallocProc)( (YYMALLOCARGTYPE)sizeof(yyParser) );
 
@@ -483,7 +483,7 @@ static void yy_destructor(
 	YYCODETYPE yymajor,     /* Type code for object to destroy */
 	YYMINORTYPE *yypminor   /* The object to be destroyed */
 ) {
-	ParseARG_FETCH;
+	TDPParseARG_FETCH;
 
 	switch ( yymajor ) {
 		/* Here is inserted the actions which take place when a
@@ -534,7 +534,7 @@ static void yy_pop_parser_stack(yyParser *pParser) {
 ** is defined in a %include section of the input grammar) then it is
 ** assumed that the input pointer is never NULL.
 */
-void ParseFree(
+void TDPParseFree(
 	void *p,                    /* The parser to be deleted */
 	void (*freeProc)(void*)     /* Function used to reclaim memory */
 ) {
@@ -565,7 +565,7 @@ void ParseFree(
 ** Return the peak depth of the stack for a parser.
 */
 #ifdef YYTRACKMAXSTACKDEPTH
-int ParseStackPeak(void *p) {
+int TDPParseStackPeak(void *p) {
 	yyParser *pParser = (yyParser*)p;
 	return pParser->yyhwm;
 }
@@ -685,7 +685,7 @@ static int yy_find_reduce_action(
 ** The following routine is called if the stack overflows.
 */
 static void yyStackOverflow(yyParser *yypParser) {
-	ParseARG_FETCH;
+	TDPParseARG_FETCH;
 	yypParser->yytos--;
 	#ifndef NDEBUG
 
@@ -703,7 +703,7 @@ static void yyStackOverflow(yyParser *yypParser) {
 	** stack every overflows */
 	/******** Begin %stack_overflow code ******************************************/
 	/******** End %stack_overflow code ********************************************/
-	ParseARG_STORE; /* Suppress warning about unused %extra_argument var */
+	TDPParseARG_STORE; /* Suppress warning about unused %extra_argument var */
 }
 
 /*
@@ -733,7 +733,7 @@ static void yy_shift(
 	yyParser *yypParser,          /* The parser to be shifted */
 	int yyNewState,               /* The new state to shift in */
 	int yyMajor,                  /* The major token to shift in */
-	ParseTOKENTYPE yyMinor        /* The minor token to shift in */
+	TDPParseTOKENTYPE yyMinor        /* The minor token to shift in */
 ) {
 	yyStackEntry *yytos;
 	yypParser->yytos++;
@@ -822,7 +822,7 @@ static void yy_reduce(
 	int yyact;                      /* The next action */
 	yyStackEntry *yymsp;            /* The top of the parser's stack */
 	int yysize;                     /* Amount to pop the stack */
-	ParseARG_FETCH;
+	TDPParseARG_FETCH;
 	yymsp = yypParser->yytos;
 	#ifndef NDEBUG
 
@@ -1005,7 +1005,7 @@ static void yy_reduce(
 static void yy_parse_failed(
 	yyParser *yypParser           /* The parser */
 ) {
-	ParseARG_FETCH;
+	TDPParseARG_FETCH;
 	#ifndef NDEBUG
 
 	if ( yyTraceFILE ) {
@@ -1024,7 +1024,7 @@ static void yy_parse_failed(
 
 	fprintf(stderr, "Parser failed to successfully parse.\n");
 	/************ End %parse_failure code *****************************************/
-	ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
+	TDPParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 #endif /* YYNOERRORRECOVERY */
 
@@ -1034,9 +1034,9 @@ static void yy_parse_failed(
 static void yy_syntax_error(
 	yyParser *yypParser,           /* The parser */
 	int yymajor,                   /* The major type of the error token */
-	ParseTOKENTYPE yyminor         /* The minor type of the error token */
+	TDPParseTOKENTYPE yyminor         /* The minor type of the error token */
 ) {
-	ParseARG_FETCH;
+	TDPParseARG_FETCH;
 #define TOKEN yyminor
 	/************ Begin %syntax_error code ****************************************/
 
@@ -1054,7 +1054,7 @@ static void yy_syntax_error(
 
 	#endif
 	/************ End %syntax_error code ******************************************/
-	ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
+	TDPParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 
 /*
@@ -1063,7 +1063,7 @@ static void yy_syntax_error(
 static void yy_accept(
 	yyParser *yypParser           /* The parser */
 ) {
-	ParseARG_FETCH;
+	TDPParseARG_FETCH;
 	#ifndef NDEBUG
 
 	if ( yyTraceFILE ) {
@@ -1081,12 +1081,12 @@ static void yy_accept(
 
 //	printf("parsing completed successfully!\n");
 	/*********** End %parse_accept code *******************************************/
-	ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
+	TDPParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
 }
 
 /* The main parser program.
 ** The first argument is a pointer to a structure obtained from
-** "ParseAlloc" which describes the current state of the parser.
+** "TDPParseAlloc" which describes the current state of the parser.
 ** The second argument is the major token number.  The third is
 ** the minor token.  The fourth optional argument is whatever the
 ** user wants (and specified in the grammar) and is available for
@@ -1103,11 +1103,11 @@ static void yy_accept(
 ** Outputs:
 ** None.
 */
-void Parse(
+void TDPParse(
 	void *yyp,                   /* The parser */
 	int yymajor,                 /* The major token code number */
-	ParseTOKENTYPE yyminor       /* The value for the token */
-	ParseARG_PDECL               /* Optional %extra_argument parameter */
+	TDPParseTOKENTYPE yyminor       /* The value for the token */
+	TDPParseARG_PDECL               /* Optional %extra_argument parameter */
 ) {
 	YYMINORTYPE yyminorunion;
 	unsigned int yyact;   /* The parser action. */
@@ -1124,7 +1124,7 @@ void Parse(
 	#if !defined(YYERRORSYMBOL) && !defined(YYNOERRORRECOVERY)
 	yyendofinput = (yymajor == 0);
 	#endif
-	ParseARG_STORE;
+	TDPParseARG_STORE;
 
 	#ifndef NDEBUG
 

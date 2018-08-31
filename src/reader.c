@@ -78,10 +78,10 @@
 
 
 // Basic parser function declarations
-void * ParseAlloc();
-void Parse();
-void ParseFree();
-void ParseTrace();
+void * TDPParseAlloc();
+void TDPParse();
+void TDPParseFree();
+void TDPParseTrace();
 
 
 simple_token * tokenize_text(const char * source, size_t start, size_t len, int format) {
@@ -92,7 +92,7 @@ simple_token * tokenize_text(const char * source, size_t start, size_t len, int 
 	s.cur = s.start;
 
 	int type;						// TOKEN type
-	simple_token * t;				// Create token chain
+	simple_token * t = NULL;		// Create token chain
 	simple_token * root = simple_token_new(0, start, len);
 
 	// Where do we stop parsing?
@@ -144,7 +144,7 @@ simple_token * tokenize_text(const char * source, size_t start, size_t len, int 
 			case 0:
 
 				// Source finished
-				if (t->tail && t->tail->type != TDP_EOF) {
+				if (t && t->tail && (t->tail->type != TDP_EOF)) {
 					t = simple_token_new(TDP_EOF, (size_t)(s.start - source), (size_t)(s.cur - s.start));
 					simple_token_chain_append(root, t);
 				}
@@ -168,7 +168,7 @@ simple_token * tokenize_text(const char * source, size_t start, size_t len, int 
 int parse_tdp_token_chain(simple_token * chain) {
 
 	// Parser
-	void * pParser = ParseAlloc (malloc);
+	void * pParser = TDPParseAlloc (malloc);
 	simple_token * walker = chain->next;
 	simple_token * remainder;
 
@@ -176,7 +176,7 @@ int parse_tdp_token_chain(simple_token * chain) {
 
 	#ifndef NDEBUG
 	fprintf(stderr, "\n");
-	ParseTrace(stderr, "parser >>");
+	TDPParseTrace(stderr, "parser >>");
 	#endif
 
 	while (walker != NULL) {
@@ -190,15 +190,15 @@ int parse_tdp_token_chain(simple_token * chain) {
 			remainder->prev = NULL;
 		}
 
-		Parse(pParser, walker->type, walker, &result);
+		TDPParse(pParser, walker->type, walker, &result);
 
 		walker = remainder;
 	}
 
 	// Signal that we're done
-	Parse(pParser, 0, NULL, &result);
+	TDPParse(pParser, 0, NULL, &result);
 
-	ParseFree(pParser, free);
+	TDPParseFree(pParser, free);
 
 	if (result) {
 		// Success
