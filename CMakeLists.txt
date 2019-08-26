@@ -92,7 +92,7 @@ MACRO(ADD_PUBLIC_HEADER target filename)
 
 	SET_TARGET_PROPERTIES(${target} PROPERTIES
 		XCODE_ATTRIBUTE_VALID_ARCHITECTURES
-		"x86_64 i386 armv6 armv7 armv7s arm64"
+		"x86_64 armv6 armv7 armv7s arm64"
 	)
 
 ENDMACRO(ADD_PUBLIC_HEADER)
@@ -260,12 +260,12 @@ endif()
 if (APPLE)
 
 	# Configure backwards-compatible support (if your project allows it)
-	SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.4" CACHE STRING "Deployment target for OSX" FORCE)
+	SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.6" CACHE STRING "Deployment target for OSX" FORCE)
 	SET(CMAKE_XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET "10.0" CACHE STRING "Deployment target for iOS" FORCE)
 
-	# Compile for x86_64 and i386.  ppc no longer supported
+	# Compile for x86_64.  ppc and i386 no longer supported
 	if(CMAKE_BUILD_TYPE MATCHES "Release")
-		SET (CMAKE_OSX_ARCHITECTURES x86_64;i386)
+		SET (CMAKE_OSX_ARCHITECTURES x86_64)
 	endif(CMAKE_BUILD_TYPE MATCHES "Release")
 
 	# Use PackageMaker for installers?
