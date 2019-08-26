@@ -8,14 +8,14 @@ cmake_minimum_required (VERSION 2.6)
 set (My_Project_Title "TDP-Parser")
 set (My_Project_Description "Parse CSV (and other tabular data) and export to JSON")
 set (My_Project_Author "Fletcher T. Penney")
-set (My_Project_Revised_Date "2018-08-13")
+set (My_Project_Revised_Date "2019-08-26")
 set (My_Project_Version_Major 1)
 set (My_Project_Version_Minor 1)
-set (My_Project_Version_Patch 0)
+set (My_Project_Version_Patch 1)
 
 set (My_Project_Version "${My_Project_Version_Major}.${My_Project_Version_Minor}.${My_Project_Version_Patch}")
 
-set (My_Project_Copyright_Date "2018")
+set (My_Project_Copyright_Date "2018-2019")
 set (My_Project_Copyright "Copyright © ${My_Project_Copyright_Date} ${My_Project_Author}.")
 
 string(TOUPPER ${My_Project_Title} My_Project_Title_Caps  )
