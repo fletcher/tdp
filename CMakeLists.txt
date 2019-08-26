@@ -10,8 +10,8 @@ set (My_Project_Description "Parse CSV (and other tabular data) and export to JS
 set (My_Project_Author "Fletcher T. Penney")
 set (My_Project_Revised_Date "2019-08-26")
 set (My_Project_Version_Major 1)
-set (My_Project_Version_Minor 1)
-set (My_Project_Version_Patch 1)
+set (My_Project_Version_Minor 2)
+set (My_Project_Version_Patch 0)
 
 set (My_Project_Version "${My_Project_Version_Major}.${My_Project_Version_Minor}.${My_Project_Version_Patch}")
 
