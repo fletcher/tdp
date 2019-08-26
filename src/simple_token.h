@@ -64,11 +64,11 @@ struct simple_token {
 	size_t						start;			//!< Starting offset in the source string
 	size_t						len;			//!< Length of the token in the source string
 
-	struct simple_token *		next;			//!< Pointer to next token in the chain
-	struct simple_token *		prev;			//!< Pointer to previous marker in the chain
-	struct simple_token *		child;			//!< Pointer to child chain
+	struct simple_token 	*	next;			//!< Pointer to next token in the chain
+	struct simple_token 	*	prev;			//!< Pointer to previous marker in the chain
+	struct simple_token 	*	child;			//!< Pointer to child chain
 
-	struct simple_token *		tail;			//!< Pointer to last token in the chain
+	struct simple_token 	*	tail;			//!< Pointer to last token in the chain
 };
 
 typedef struct simple_token simple_token;

@@ -31,10 +31,10 @@
 #include "libTDP.h"
 
 // argtable structs
-struct arg_lit *a_help, *a_array;
-struct arg_str *a_format;
-struct arg_end *a_end;
-struct arg_file *a_file;
+struct arg_lit * a_help, *a_array;
+struct arg_str * a_format;
+struct arg_end * a_end;
+struct arg_file * a_file;
 
 void convert_buffer(DString * buffer, short format, bool array_out) {
 	if (buffer) {
@@ -59,13 +59,13 @@ void convert_buffer(DString * buffer, short format, bool array_out) {
 }
 
 
-int main( int argc, char** argv ) {
+int main( int argc, char ** argv ) {
 	char * binname = "tdp";
 	short format = FORMAT_CSV;
 	int exitcode = EXIT_SUCCESS;
 	bool array_out = false;
 
-	void *argtable[] = {
+	void * argtable[] = {
 		a_help			= arg_lit0(NULL, "help", "display this help and exit"),
 
 		a_array			= arg_lit0("a", "array", "output as array of arrays"),

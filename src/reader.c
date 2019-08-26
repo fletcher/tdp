@@ -174,10 +174,10 @@ int parse_tdp_token_chain(simple_token * chain) {
 
 	simple_token * result = NULL;
 
-	#ifndef NDEBUG
+#ifndef NDEBUG
 	fprintf(stderr, "\n");
 	TDPParseTrace(stderr, "parser >>");
-	#endif
+#endif
 
 	while (walker != NULL) {
 		remainder = walker->next;
@@ -213,7 +213,7 @@ int parse_tdp_token_chain(simple_token * chain) {
 
 
 #ifdef TEST
-void Test_parse_csv_token_chain(CuTest* tc) {
+void Test_parse_csv_token_chain(CuTest * tc) {
 	DString * test = d_string_new("foo,bar\none,two");
 	simple_token * t;
 	int result;
@@ -493,7 +493,7 @@ DString * export_to_json(const char * source, simple_token * tree, bool array_ou
 
 
 #ifdef TEST
-void Test_export_to_json(CuTest* tc) {
+void Test_export_to_json(CuTest * tc) {
 	DString * test = d_string_new("foo,bar\none,two");
 	DString * out;
 	simple_token * t;
