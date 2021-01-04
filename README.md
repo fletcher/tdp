@@ -2,11 +2,11 @@
 
 |            |                           |  
 | ---------- | ------------------------- |  
-| Title:     | TDP-Parser        |  
+| Title:     | libTDP        |  
 | Author:    | Fletcher T. Penney       |  
-| Date:      | 2019-08-26 |  
-| Copyright: | Copyright © 2018-2019 Fletcher T. Penney.    |  
-| Version:   | 1.2.0      |  
+| Date:      | 2021-01-04 |  
+| Copyright: | Copyright © 2018-2021 Fletcher T. Penney.    |  
+| Version:   | 1.3.0      |  
 
 
 ## Introduction ##
