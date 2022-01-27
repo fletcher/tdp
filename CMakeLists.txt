@@ -361,7 +361,7 @@ else()
 	endif (APPLE)
 
 	# Install Target
-	install (TARGETS ${My_Project_Title}
+	install (TARGETS tdp
 		DESTINATION bin
 		COMPONENT Main
 	)
