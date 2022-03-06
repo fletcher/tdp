@@ -84,6 +84,7 @@ fields				::= field.
 
 field(A)			::= contents(B) FIELD_DELIMITER(C).					{ A = simple_token_new_parent(B, TDP_FIELD); simple_token_free(C); if (B->type == TEXT_NUMERIC && B->next == NULL) { A->type = TDP_FIELD_NUMERIC; } }
 field(A)			::= contents(B).									{ A = simple_token_new_parent(B, TDP_FIELD); if (B->type == TEXT_NUMERIC && B->next == NULL) { A->type = TDP_FIELD_NUMERIC; } }
+field(A)			::= FIELD_DELIMITER(C).								{ A = simple_token_new_parent(NULL, TDP_FIELD); simple_token_free(C); }
 
 contents			::= contents(B) content(C).							{ simple_token_chain_append(B, C); }
 contents			::= content.

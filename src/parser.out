@@ -9,6 +9,7 @@ State 0:
           fields ::= * field
           field ::= * contents FIELD_DELIMITER
           field ::= * contents
+          field ::= * FIELD_DELIMITER
           contents ::= * contents content
           contents ::= * content
           contents ::= * ESCAPED_ESCAPE
@@ -16,9 +17,10 @@ State 0:
           content ::= * TEXT_NUMERIC
           content ::= * ESCAPE escaped_contents ESCAPE
 
-                    TEXT_PLAIN shift-reduce 17     content ::= TEXT_PLAIN
-                ESCAPED_ESCAPE shift-reduce 9      contents ::= ESCAPED_ESCAPE
-                  TEXT_NUMERIC shift-reduce 18     content ::= TEXT_NUMERIC
+                    TEXT_PLAIN shift-reduce 18     content ::= TEXT_PLAIN
+               FIELD_DELIMITER shift-reduce 8      field ::= FIELD_DELIMITER
+                ESCAPED_ESCAPE shift-reduce 10     contents ::= ESCAPED_ESCAPE
+                  TEXT_NUMERIC shift-reduce 19     content ::= TEXT_NUMERIC
                         ESCAPE shift        5      
                            doc accept
                         header shift        1      
@@ -38,6 +40,7 @@ State 1:
           fields ::= * field
           field ::= * contents FIELD_DELIMITER
           field ::= * contents
+          field ::= * FIELD_DELIMITER
           contents ::= * contents content
           contents ::= * content
           contents ::= * ESCAPED_ESCAPE
@@ -45,9 +48,10 @@ State 1:
           content ::= * TEXT_NUMERIC
           content ::= * ESCAPE escaped_contents ESCAPE
 
-                    TEXT_PLAIN shift-reduce 17     content ::= TEXT_PLAIN
-                ESCAPED_ESCAPE shift-reduce 9      contents ::= ESCAPED_ESCAPE
-                  TEXT_NUMERIC shift-reduce 18     content ::= TEXT_NUMERIC
+                    TEXT_PLAIN shift-reduce 18     content ::= TEXT_PLAIN
+               FIELD_DELIMITER shift-reduce 8      field ::= FIELD_DELIMITER
+                ESCAPED_ESCAPE shift-reduce 10     contents ::= ESCAPED_ESCAPE
+                  TEXT_NUMERIC shift-reduce 19     content ::= TEXT_NUMERIC
                         ESCAPE shift        5      
                        records shift        3      
                         record shift        3        /* because record==records */
@@ -64,6 +68,7 @@ State 2:
           fields ::= * field
           field ::= * contents FIELD_DELIMITER
           field ::= * contents
+          field ::= * FIELD_DELIMITER
           contents ::= * contents content
           contents ::= * content
           contents ::= * ESCAPED_ESCAPE
@@ -72,9 +77,10 @@ State 2:
           content ::= * ESCAPE escaped_contents ESCAPE
 
                              $ reduce       1      doc ::= records
-                    TEXT_PLAIN shift-reduce 17     content ::= TEXT_PLAIN
-                ESCAPED_ESCAPE shift-reduce 9      contents ::= ESCAPED_ESCAPE
-                  TEXT_NUMERIC shift-reduce 18     content ::= TEXT_NUMERIC
+                    TEXT_PLAIN shift-reduce 18     content ::= TEXT_PLAIN
+               FIELD_DELIMITER shift-reduce 8      field ::= FIELD_DELIMITER
+                ESCAPED_ESCAPE shift-reduce 10     contents ::= ESCAPED_ESCAPE
+                  TEXT_NUMERIC shift-reduce 19     content ::= TEXT_NUMERIC
                         ESCAPE shift        5      
                         record shift-reduce 3      records ::= records record
                         fields shift        4      
@@ -90,6 +96,7 @@ State 3:
           fields ::= * field
           field ::= * contents FIELD_DELIMITER
           field ::= * contents
+          field ::= * FIELD_DELIMITER
           contents ::= * contents content
           contents ::= * content
           contents ::= * ESCAPED_ESCAPE
@@ -98,9 +105,10 @@ State 3:
           content ::= * ESCAPE escaped_contents ESCAPE
 
                              $ reduce       0      doc ::= header records
-                    TEXT_PLAIN shift-reduce 17     content ::= TEXT_PLAIN
-                ESCAPED_ESCAPE shift-reduce 9      contents ::= ESCAPED_ESCAPE
-                  TEXT_NUMERIC shift-reduce 18     content ::= TEXT_NUMERIC
+                    TEXT_PLAIN shift-reduce 18     content ::= TEXT_PLAIN
+               FIELD_DELIMITER shift-reduce 8      field ::= FIELD_DELIMITER
+                ESCAPED_ESCAPE shift-reduce 10     contents ::= ESCAPED_ESCAPE
+                  TEXT_NUMERIC shift-reduce 19     content ::= TEXT_NUMERIC
                         ESCAPE shift        5      
                         record shift-reduce 3      records ::= records record
                         fields shift        4      
@@ -115,6 +123,7 @@ State 4:
           fields ::= fields * field
           field ::= * contents FIELD_DELIMITER
           field ::= * contents
+          field ::= * FIELD_DELIMITER
           contents ::= * contents content
           contents ::= * content
           contents ::= * ESCAPED_ESCAPE
@@ -122,11 +131,12 @@ State 4:
           content ::= * TEXT_NUMERIC
           content ::= * ESCAPE escaped_contents ESCAPE
 
-                    TEXT_PLAIN shift-reduce 17     content ::= TEXT_PLAIN
-              RECORD_DELIMITER shift-reduce 12     eol ::= RECORD_DELIMITER
-                       TDP_EOF shift-reduce 13     eol ::= TDP_EOF
-                ESCAPED_ESCAPE shift-reduce 9      contents ::= ESCAPED_ESCAPE
-                  TEXT_NUMERIC shift-reduce 18     content ::= TEXT_NUMERIC
+                    TEXT_PLAIN shift-reduce 18     content ::= TEXT_PLAIN
+              RECORD_DELIMITER shift-reduce 13     eol ::= RECORD_DELIMITER
+                       TDP_EOF shift-reduce 14     eol ::= TDP_EOF
+               FIELD_DELIMITER shift-reduce 8      field ::= FIELD_DELIMITER
+                ESCAPED_ESCAPE shift-reduce 10     contents ::= ESCAPED_ESCAPE
+                  TEXT_NUMERIC shift-reduce 19     content ::= TEXT_NUMERIC
                         ESCAPE shift        5      
                            eol shift-reduce 4      record ::= fields eol
                          field shift-reduce 5      fields ::= fields field
@@ -143,11 +153,11 @@ State 5:
           escaped_content ::= * RECORD_DELIMITER
           escaped_content ::= * ESCAPED_ESCAPE
 
-                    TEXT_PLAIN shift-reduce 20     escaped_content ::= TEXT_PLAIN
-              RECORD_DELIMITER shift-reduce 23     escaped_content ::= RECORD_DELIMITER
-               FIELD_DELIMITER shift-reduce 22     escaped_content ::= FIELD_DELIMITER
-                ESCAPED_ESCAPE shift-reduce 24     escaped_content ::= ESCAPED_ESCAPE
-                  TEXT_NUMERIC shift-reduce 21     escaped_content ::= TEXT_NUMERIC
+                    TEXT_PLAIN shift-reduce 21     escaped_content ::= TEXT_PLAIN
+              RECORD_DELIMITER shift-reduce 24     escaped_content ::= RECORD_DELIMITER
+               FIELD_DELIMITER shift-reduce 23     escaped_content ::= FIELD_DELIMITER
+                ESCAPED_ESCAPE shift-reduce 25     escaped_content ::= ESCAPED_ESCAPE
+                  TEXT_NUMERIC shift-reduce 22     escaped_content ::= TEXT_NUMERIC
               escaped_contents shift        6      
                escaped_content shift        6        /* because escaped_content==escaped_contents */
 
@@ -160,13 +170,13 @@ State 6:
           escaped_content ::= * RECORD_DELIMITER
           escaped_content ::= * ESCAPED_ESCAPE
 
-                    TEXT_PLAIN shift-reduce 20     escaped_content ::= TEXT_PLAIN
-              RECORD_DELIMITER shift-reduce 23     escaped_content ::= RECORD_DELIMITER
-               FIELD_DELIMITER shift-reduce 22     escaped_content ::= FIELD_DELIMITER
-                ESCAPED_ESCAPE shift-reduce 24     escaped_content ::= ESCAPED_ESCAPE
-                  TEXT_NUMERIC shift-reduce 21     escaped_content ::= TEXT_NUMERIC
-                        ESCAPE shift-reduce 10     content ::= ESCAPE escaped_contents ESCAPE
-               escaped_content shift-reduce 11     escaped_contents ::= escaped_contents escaped_content
+                    TEXT_PLAIN shift-reduce 21     escaped_content ::= TEXT_PLAIN
+              RECORD_DELIMITER shift-reduce 24     escaped_content ::= RECORD_DELIMITER
+               FIELD_DELIMITER shift-reduce 23     escaped_content ::= FIELD_DELIMITER
+                ESCAPED_ESCAPE shift-reduce 25     escaped_content ::= ESCAPED_ESCAPE
+                  TEXT_NUMERIC shift-reduce 22     escaped_content ::= TEXT_NUMERIC
+                        ESCAPE shift-reduce 11     content ::= ESCAPE escaped_contents ESCAPE
+               escaped_content shift-reduce 12     escaped_contents ::= escaped_contents escaped_content
 
 State 7:
           field ::= contents * FIELD_DELIMITER
@@ -176,25 +186,27 @@ State 7:
           content ::= * TEXT_NUMERIC
           content ::= * ESCAPE escaped_contents ESCAPE
 
-                    TEXT_PLAIN shift-reduce 17     content ::= TEXT_PLAIN
+                    TEXT_PLAIN shift-reduce 18     content ::= TEXT_PLAIN
                     TEXT_PLAIN reduce       7       ** Parsing conflict **
                FIELD_DELIMITER shift-reduce 6      field ::= contents FIELD_DELIMITER
-                  TEXT_NUMERIC shift-reduce 18     content ::= TEXT_NUMERIC
+               FIELD_DELIMITER reduce       7       ** Parsing conflict **
+                  TEXT_NUMERIC shift-reduce 19     content ::= TEXT_NUMERIC
                   TEXT_NUMERIC reduce       7       ** Parsing conflict **
                         ESCAPE shift        5      
                         ESCAPE reduce       7       ** Parsing conflict **
-                       content shift-reduce 8      contents ::= contents content
+                       content shift-reduce 9      contents ::= contents content
                      {default} reduce       7      field ::= contents
 
 State 8:
       (2) header ::= record *
-     (14) records ::= record *
+     (15) records ::= record *
 
-                             $ reduce       14     records ::= record
-                    TEXT_PLAIN reduce       14      ** Parsing conflict **
-                ESCAPED_ESCAPE reduce       14      ** Parsing conflict **
-                  TEXT_NUMERIC reduce       14      ** Parsing conflict **
-                        ESCAPE reduce       14      ** Parsing conflict **
+                             $ reduce       15     records ::= record
+                    TEXT_PLAIN reduce       15      ** Parsing conflict **
+               FIELD_DELIMITER reduce       15      ** Parsing conflict **
+                ESCAPED_ESCAPE reduce       15      ** Parsing conflict **
+                  TEXT_NUMERIC reduce       15      ** Parsing conflict **
+                        ESCAPE reduce       15      ** Parsing conflict **
                      {default} reduce       2      header ::= record
 
 ----------------------------------------------------
@@ -209,13 +221,13 @@ Symbols:
     7: TEXT_NUMERIC
     8: ESCAPE
     9: error:
-   10: doc: TEXT_PLAIN ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
-   11: header: TEXT_PLAIN ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
-   12: records: TEXT_PLAIN ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
+   10: doc: TEXT_PLAIN FIELD_DELIMITER ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
+   11: header: TEXT_PLAIN FIELD_DELIMITER ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
+   12: records: TEXT_PLAIN FIELD_DELIMITER ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
    13: eol: RECORD_DELIMITER TDP_EOF
-   14: record: TEXT_PLAIN ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
-   15: fields: TEXT_PLAIN ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
-   16: field: TEXT_PLAIN ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
+   14: record: TEXT_PLAIN FIELD_DELIMITER ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
+   15: fields: TEXT_PLAIN FIELD_DELIMITER ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
+   16: field: TEXT_PLAIN FIELD_DELIMITER ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
    17: contents: TEXT_PLAIN ESCAPED_ESCAPE TEXT_NUMERIC ESCAPE
    18: content: TEXT_PLAIN TEXT_NUMERIC ESCAPE
    19: escaped_contents: TEXT_PLAIN RECORD_DELIMITER FIELD_DELIMITER ESCAPED_ESCAPE TEXT_NUMERIC

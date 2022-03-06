@@ -107,15 +107,15 @@ typedef union {
 #define TDPParseARG_STORE yypParser->result  = result
 #define YYFALLBACK 1
 #define YYNSTATE             9
-#define YYNRULE              25
+#define YYNRULE              26
 #define YY_MAX_SHIFT         8
-#define YY_MIN_SHIFTREDUCE   30
-#define YY_MAX_SHIFTREDUCE   54
-#define YY_MIN_REDUCE        55
-#define YY_MAX_REDUCE        79
-#define YY_ERROR_ACTION      80
-#define YY_ACCEPT_ACTION     81
-#define YY_NO_ACTION         82
+#define YY_MIN_SHIFTREDUCE   31
+#define YY_MAX_SHIFTREDUCE   56
+#define YY_MIN_REDUCE        57
+#define YY_MAX_REDUCE        82
+#define YY_ERROR_ACTION      83
+#define YY_ACCEPT_ACTION     84
+#define YY_NO_ACTION         85
 /************* End control #defines *******************************************/
 
 /* Define the yytestcase() macro to be a no-op if is not already defined
@@ -189,25 +189,25 @@ typedef union {
 *********** Begin parsing tables **********************************************/
 #define YY_ACTTAB_COUNT (81)
 static const YYACTIONTYPE yy_action[] = {
-	/*     0 */    81,    1,    2,   41,    8,    4,    4,    7,    7,    3,
-	/*    10 */    38,    3,    4,    4,    7,    7,   47,   69,   42,   43,
-	/*    20 */    57,   39,   48,    5,   50,   57,   53,   57,   52,   54,
-	/*    30 */    51,   40,   56,   47,   57,    6,    6,   57,   39,   48,
-	/*    40 */     5,   33,    4,    4,    7,    7,   55,   47,   57,   57,
-	/*    50 */    57,   57,   39,   48,    5,   50,   57,   53,   57,   52,
-	/*    60 */    54,   51,   47,   57,   57,   57,   57,   39,   48,    5,
-	/*    70 */    57,   34,   57,   47,   35,    7,    7,   36,   57,   48,
+	/*     0 */    84,    1,    2,   43,    8,    4,    4,    7,    7,   49,
+	/*    10 */    40,   44,   45,   39,   41,   50,    5,    3,   72,    3,
+	/*    20 */     4,    4,    7,    7,   58,   49,    6,    6,   59,   39,
+	/*    30 */    41,   50,    5,   57,   49,   59,   59,   59,   39,   41,
+	/*    40 */    50,    5,   52,   59,   55,   59,   54,   56,   53,   42,
+	/*    50 */    49,   59,   59,   59,   39,   41,   50,    5,   59,   34,
+	/*    60 */     4,    4,    7,    7,   52,   59,   55,   59,   54,   56,
+	/*    70 */    53,   35,   59,   49,   36,    7,    7,   37,   59,   50,
 	/*    80 */     5,
 };
 static const YYCODETYPE yy_lookahead[] = {
-	/*     0 */    10,   11,   12,   20,   14,   15,   16,   17,   18,   12,
-	/*    10 */    18,   14,   15,   16,   17,   18,    1,    0,    3,    4,
-	/*    20 */    21,    6,    7,    8,    1,   21,    3,   21,    5,    6,
-	/*    30 */     7,    8,    0,    1,   21,   19,   20,   21,    6,    7,
-	/*    40 */     8,   14,   15,   16,   17,   18,    0,    1,   21,   21,
-	/*    50 */    21,   21,    6,    7,    8,    1,   21,    3,   21,    5,
-	/*    60 */     6,    7,    1,   21,   21,   21,   21,    6,    7,    8,
-	/*    70 */    21,   13,   21,    1,   16,   17,   18,    5,   21,    7,
+	/*     0 */    10,   11,   12,   20,   14,   15,   16,   17,   18,    1,
+	/*    10 */    18,    3,    4,    5,    6,    7,    8,   12,    0,   14,
+	/*    20 */    15,   16,   17,   18,    0,    1,   19,   20,   21,    5,
+	/*    30 */     6,    7,    8,    0,    1,   21,   21,   21,    5,    6,
+	/*    40 */     7,    8,    1,   21,    3,   21,    5,    6,    7,    8,
+	/*    50 */     1,   21,   21,   21,    5,    6,    7,    8,   21,   14,
+	/*    60 */    15,   16,   17,   18,    1,   21,    3,   21,    5,    6,
+	/*    70 */     7,   13,   21,    1,   16,   17,   18,    5,   21,    7,
 	/*    80 */     8,
 };
 #define YY_SHIFT_USE_DFLT (81)
@@ -215,17 +215,17 @@ static const YYCODETYPE yy_lookahead[] = {
 #define YY_SHIFT_MIN      (0)
 #define YY_SHIFT_MAX      (72)
 static const unsigned char yy_shift_ofst[] = {
-	/*     0 */    61,   61,   32,   46,   15,   54,   23,   72,   17,
+	/*     0 */    49,   49,   24,   33,    8,   63,   41,   72,   18,
 };
 #define YY_REDUCE_USE_DFLT (-18)
 #define YY_REDUCE_COUNT (7)
 #define YY_REDUCE_MIN   (-17)
 #define YY_REDUCE_MAX   (58)
 static const signed char yy_reduce_ofst[] = {
-	/*     0 */   -10,   -3,   27,   27,   58,   16,  -17,   -8,
+	/*     0 */   -10,    5,   45,   45,   58,    7,  -17,   -8,
 };
 static const YYACTIONTYPE yy_default[] = {
-	/*     0 */    80,   80,   80,   80,   80,   80,   80,   62,   57,
+	/*     0 */    83,   83,   83,   83,   83,   83,   83,   64,   59,
 };
 /********** End of lemon-generated parsing tables *****************************/
 
@@ -358,23 +358,24 @@ static const char * const yyRuleName[] = {
 	/*   5 */ "fields ::= fields field",
 	/*   6 */ "field ::= contents FIELD_DELIMITER",
 	/*   7 */ "field ::= contents",
-	/*   8 */ "contents ::= contents content",
-	/*   9 */ "contents ::= ESCAPED_ESCAPE",
-	/*  10 */ "content ::= ESCAPE escaped_contents ESCAPE",
-	/*  11 */ "escaped_contents ::= escaped_contents escaped_content",
-	/*  12 */ "eol ::= RECORD_DELIMITER",
-	/*  13 */ "eol ::= TDP_EOF",
-	/*  14 */ "records ::= record",
-	/*  15 */ "fields ::= field",
-	/*  16 */ "contents ::= content",
-	/*  17 */ "content ::= TEXT_PLAIN",
-	/*  18 */ "content ::= TEXT_NUMERIC",
-	/*  19 */ "escaped_contents ::= escaped_content",
-	/*  20 */ "escaped_content ::= TEXT_PLAIN",
-	/*  21 */ "escaped_content ::= TEXT_NUMERIC",
-	/*  22 */ "escaped_content ::= FIELD_DELIMITER",
-	/*  23 */ "escaped_content ::= RECORD_DELIMITER",
-	/*  24 */ "escaped_content ::= ESCAPED_ESCAPE",
+	/*   8 */ "field ::= FIELD_DELIMITER",
+	/*   9 */ "contents ::= contents content",
+	/*  10 */ "contents ::= ESCAPED_ESCAPE",
+	/*  11 */ "content ::= ESCAPE escaped_contents ESCAPE",
+	/*  12 */ "escaped_contents ::= escaped_contents escaped_content",
+	/*  13 */ "eol ::= RECORD_DELIMITER",
+	/*  14 */ "eol ::= TDP_EOF",
+	/*  15 */ "records ::= record",
+	/*  16 */ "fields ::= field",
+	/*  17 */ "contents ::= content",
+	/*  18 */ "content ::= TEXT_PLAIN",
+	/*  19 */ "content ::= TEXT_NUMERIC",
+	/*  20 */ "escaped_contents ::= escaped_content",
+	/*  21 */ "escaped_content ::= TEXT_PLAIN",
+	/*  22 */ "escaped_content ::= TEXT_NUMERIC",
+	/*  23 */ "escaped_content ::= FIELD_DELIMITER",
+	/*  24 */ "escaped_content ::= RECORD_DELIMITER",
+	/*  25 */ "escaped_content ::= ESCAPED_ESCAPE",
 };
 #endif /* NDEBUG */
 
@@ -789,6 +790,7 @@ static const struct {
 	{ 15, 2 },
 	{ 16, 2 },
 	{ 16, 1 },
+	{ 16, 1 },
 	{ 17, 2 },
 	{ 17, 1 },
 	{ 18, 3 },
@@ -899,11 +901,11 @@ static void yy_reduce(
 		case 5: /* fields ::= fields field */
 			yytestcase(yyruleno == 5);
 
-		case 8: /* contents ::= contents content */
-			yytestcase(yyruleno == 8);
+		case 9: /* contents ::= contents content */
+			yytestcase(yyruleno == 9);
 
-		case 11: /* escaped_contents ::= escaped_contents escaped_content */
-			yytestcase(yyruleno == 11);
+		case 12: /* escaped_contents ::= escaped_contents escaped_content */
+			yytestcase(yyruleno == 12);
 			{
 				simple_token_chain_append(yymsp[-1].minor.yy0, yymsp[0].minor.yy0);
 			}
@@ -940,12 +942,20 @@ static void yy_reduce(
 		yymsp[0].minor.yy0 = yylhsminor.yy0;
 		break;
 
-		case 9: { /* contents ::= ESCAPED_ESCAPE */
+		case 8: { /* field ::= FIELD_DELIMITER */
+			yylhsminor.yy0 = simple_token_new_parent(NULL, TDP_FIELD);
+			simple_token_free(yymsp[0].minor.yy0);
+		}
+
+		yymsp[0].minor.yy0 = yylhsminor.yy0;
+		break;
+
+		case 10: { /* contents ::= ESCAPED_ESCAPE */
 			yymsp[0].minor.yy0->type = TDP_EMPTY_STRING;
 		}
 		break;
 
-		case 10: { /* content ::= ESCAPE escaped_contents ESCAPE */
+		case 11: { /* content ::= ESCAPE escaped_contents ESCAPE */
 			yylhsminor.yy0 = yymsp[-1].minor.yy0;
 			simple_token_free(yymsp[-2].minor.yy0);
 			simple_token_free(yymsp[0].minor.yy0);
@@ -955,20 +965,20 @@ static void yy_reduce(
 		break;
 
 		default:
-			/* (12) eol ::= RECORD_DELIMITER */
-			yytestcase(yyruleno == 12);
-			/* (13) eol ::= TDP_EOF */ yytestcase(yyruleno == 13);
-			/* (14) records ::= record */ yytestcase(yyruleno == 14);
-			/* (15) fields ::= field (OPTIMIZED OUT) */ assert(yyruleno != 15);
-			/* (16) contents ::= content (OPTIMIZED OUT) */ assert(yyruleno != 16);
-			/* (17) content ::= TEXT_PLAIN */ yytestcase(yyruleno == 17);
-			/* (18) content ::= TEXT_NUMERIC */ yytestcase(yyruleno == 18);
-			/* (19) escaped_contents ::= escaped_content (OPTIMIZED OUT) */ assert(yyruleno != 19);
-			/* (20) escaped_content ::= TEXT_PLAIN */ yytestcase(yyruleno == 20);
-			/* (21) escaped_content ::= TEXT_NUMERIC */ yytestcase(yyruleno == 21);
-			/* (22) escaped_content ::= FIELD_DELIMITER */ yytestcase(yyruleno == 22);
-			/* (23) escaped_content ::= RECORD_DELIMITER */ yytestcase(yyruleno == 23);
-			/* (24) escaped_content ::= ESCAPED_ESCAPE */ yytestcase(yyruleno == 24);
+			/* (13) eol ::= RECORD_DELIMITER */
+			yytestcase(yyruleno == 13);
+			/* (14) eol ::= TDP_EOF */ yytestcase(yyruleno == 14);
+			/* (15) records ::= record */ yytestcase(yyruleno == 15);
+			/* (16) fields ::= field (OPTIMIZED OUT) */ assert(yyruleno != 16);
+			/* (17) contents ::= content (OPTIMIZED OUT) */ assert(yyruleno != 17);
+			/* (18) content ::= TEXT_PLAIN */ yytestcase(yyruleno == 18);
+			/* (19) content ::= TEXT_NUMERIC */ yytestcase(yyruleno == 19);
+			/* (20) escaped_contents ::= escaped_content (OPTIMIZED OUT) */ assert(yyruleno != 20);
+			/* (21) escaped_content ::= TEXT_PLAIN */ yytestcase(yyruleno == 21);
+			/* (22) escaped_content ::= TEXT_NUMERIC */ yytestcase(yyruleno == 22);
+			/* (23) escaped_content ::= FIELD_DELIMITER */ yytestcase(yyruleno == 23);
+			/* (24) escaped_content ::= RECORD_DELIMITER */ yytestcase(yyruleno == 24);
+			/* (25) escaped_content ::= ESCAPED_ESCAPE */ yytestcase(yyruleno == 25);
 			break;
 			/********** End reduce actions ************************************************/
 	};
